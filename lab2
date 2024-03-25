@@ -1,0 +1,28 @@
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    const int n = 5;
+    int arr[n] = { 0 };
+
+    ifstream numbers;
+    numbers.open("C:\\Users\\Katya\\Desktop\\языки программирования\\лабы\\numbers.txt");
+
+    if (!numbers.is_open()) {
+        cout << "Error opening file";
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++) {
+        numbers >> arr[i];
+    }
+
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << "; ";
+    }
+
+    numbers.close();
+    return 0;
+}
