@@ -1,0 +1,60 @@
+#include <iostream>
+#include <stdio.h>
+#include <iomanip>
+using namespace std;
+
+struct Student {
+	char Name[50];
+	char Class[10];
+	char Activity[20];
+};
+
+void In(Student & s) {
+	cout << "input name - ";
+	cin.getline(s.Name, 80);
+	cout << "input class - ";
+	cin.getline(s.Class, 80);
+	cout << "input activity - ";
+	cin.getline(s.Activity, 80);
+	cin.ignore();
+}
+
+void Out(const Student & s) {
+	cout << setw(20) << s.Name << setw(20) << s.Class << setw(20) << s.Activity << endl;
+}
+
+void MasIn(Student* mas, int count) {
+	for (int i = 0; i < count; i++) {
+		In(mas[i]);
+	}
+}
+
+void MasOut(Student* mas, int count) {
+	for (int i = 0; i < count; i++) {
+		Out(mas[i]);
+	}
+}
+
+void Sort(Student* mas, int count, string activity_sort) {
+	for (int i = 0; i < count; i++) {
+		if (mas[i].Activity == activity_sort) {
+			Out(mas[i]);
+		}
+	}
+}
+
+int main() {
+	int t = 0;
+	string activity_sort;
+	cout << "enter number of students - ";
+	cin >> t;
+	cin.ignore();
+	Student* l = new Student[t];
+	MasIn(l, t);
+	MasOut(l, t);
+	cout << "name of activity to sort by - ";
+	cin >> activity_sort;
+	Sort(l, t, activity_sort);
+	delete[] l;
+	return 0;
+}
