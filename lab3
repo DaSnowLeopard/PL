@@ -1,0 +1,32 @@
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+
+	ifstream text;
+	int min = 1000;
+	int cnt = 0;
+	
+	text.open("C:\\Users\\Katya\\Desktop\\языки программирования\\лабы\\text.txt");
+
+	if (!text) {
+		cout << "error with file";
+		return 1;
+	}
+
+	for (int i = 0; i < text.length(); i++) {
+		while (text != " ") {
+			cnt = cnt + 1;
+		}
+		if (cnt < min) {
+			min = cnt;
+			cnt = 0;
+		}
+		else {
+			min = min;
+			cnt = 0;
+		}
+	}
+}
