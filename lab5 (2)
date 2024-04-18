@@ -1,0 +1,105 @@
+//заменить первый и второй элемент с помощью их адрессов
+
+#include <iostream>
+#include <stdio.h>
+#include <iomanip>
+using namespace std;
+
+struct Student {
+	char Name[50];
+	char Class[10];
+	char Activity[20];
+	int d;
+};
+
+struct Node {
+	Student info;
+	Node* next;
+	Node* prev;
+};
+
+void In(Student & s) {
+	cout << "input name - ";
+	cin.getline(s.Name, 80);
+	cout << "input class - ";
+	cin.getline(s.Class, 80);
+	cout << "input activity - ";
+	cin.getline(s.Activity, 80);
+	cin.ignore();
+}
+
+void Out(const Student & s) {
+	cout << setw(20) << s.Name << setw(20) << s.Class << setw(20) << s.Activity << endl;
+}
+
+Node* first(void) { //выделение памяти под элемент списка
+	Node* pv = new Node;
+	In(pv->info);
+	pv->prev = 0;
+	pv->next = 0;
+	return pv;
+}
+
+Node* add(Node* pend) { //добавление элемента в конец списка
+	Node* pv = first();
+	pend->next = pv;
+	pv->prev = pend;
+	return pv;
+}
+
+void print(Node* pbegin) { //вывод массива
+	Node* pv = pbegin;
+	for (pv = pbegin; pv != 0; pv = pv->next) {
+		Out(pv->info);
+	}
+}
+
+void print_backwards(Node* pend) {
+	Node* pv = pend;
+	for (pv = pend; pv != 0; pv = pv->prev) {
+		Out(pv->info);
+	}
+}
+
+Node* change_elements(Node* pbegin) {
+	Node* pbeg = pbegin;
+	Node* pv = pbeg->next;
+	Node* pv1 = pv->next;
+
+	pbeg->next = pv1;
+	pbeg->prev = pv;
+	pv->next = pbeg;
+	pv->prev = 0;
+	pv1->prev = pbeg;
+
+	//print(pbegin);
+	return pv;
+}
+
+int main(void) {
+	Node *pbegin, *pend;
+	int i;
+	int t;
+	int ch = 0;
+
+	cout << "enter number of students - ";
+	cin >> t;
+	cin.ignore();
+
+	pend = pbegin = first(); //создали список
+
+	for (i = 1; i < t; i++) {
+		pend = add(pend);
+	} // добавили t элементов в список
+	//print(pbegin); //вывод списка на экран
+
+
+	print(pbegin);
+	cout << endl;
+	print_backwards(pend);
+	cout << endl;
+	pbegin = change_elements(pbegin);
+	cout << endl;
+	print(pbegin);
+	cout << endl;
+	print_backwards(pend);
