@@ -13,30 +13,28 @@ public:
 
 		x = 1 + rand() % (10 - 1 + 1);
 		y = 1 + rand() % (10 - 1 + 1);
+		r = 1 + rand() % (10 - 1 + 1);
 	}
 
-	Circle(double c_x, double c_y) {
+	Circle(double c_x, double c_y, double c_r) {
 		x = c_x;
 		y = c_y;
-		//r = c_r;
+		r = c_r;
 	}
 	
-	Circle(const Circle& r) {
-		x = r.x;
-		y = r.y;
+	Circle(const Circle& area) {
+		x = area.x;
+		y = area.y;
+		r = area.r;
 	}
-
-
-
-	/*float Area() { return (r * r * 3.14); };
-	void Info();
-	void In();*/
 
 	void In() {
 		cout << "enter x - " << endl;
 		cin >> x;
 		cout << "enter y - " << endl;
 		cin >> y;
+		cout << "enter r - " << endl;
+		cin >> r;
 		
 
 	}
@@ -45,14 +43,15 @@ public:
 		cout << "Info:" << endl;
 		cout << "x: " << x << endl;
 		cout << "y: " << y << endl;
+		cout << "r: " << r << endl;
 	}
 
-	double Radius() {
+	double Area() {
 
-		//double r;
-		r = r * r * 3.14;
+		double area;
+		area = r * r * 3.14;
 
-		return r;
+		return area;
 	}
 
 	~Circle() {}
@@ -64,19 +63,19 @@ int main() {
 	//конструктор по умолчанию
 	Circle FirstCircle;
 	FirstCircle.Info();
-	double circle1 = FirstCircle.Radius();
+	double circle1 = FirstCircle.Area();
 	cout << circle1 << endl;
 
 	//конструктор с параметрами
 	Circle SecondCircle(4, 6);
 	SecondCircle.Info();
-	double circle2 = SecondCircle.Radius();
+	double circle2 = SecondCircle.Area();
 	cout << circle2 << endl;
 
 	//конструктор копии
 	Circle ThirdCircle(SecondCircle);
 	ThirdCircle.Info();
-	double circle3 = ThirdCircle.Radius();
+	double circle3 = ThirdCircle.Area();
 	cout << circle3 << endl;
 
 }
